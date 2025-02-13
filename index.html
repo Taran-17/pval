@@ -8,195 +8,51 @@
         body {
             margin: 0;
             overflow: hidden;
-            background: url('./hearts.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Georgia', serif;
-            color: white;
-            text-align: center;
-            animation: bgZoom 20s infinite alternate;
-        }
-
-        @keyframes bgZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-
-        .petal {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: rgba(75, 0, 130, 0.8); /* Dark purple */
-            border-radius: 50%;
-            animation: fall linear infinite;
-            box-shadow: 0 0 15px rgba(75, 0, 130, 0.5); /* Purple glow */
-        }
-
-        @keyframes fall {
-            from { transform: translateY(-10vh) rotate(0deg); }
-            to { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        .popup {
-            position: fixed;
-            background: rgba(255, 255, 255, 0.9);
-            color: #ff6a88;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%) scale(0);
-            animation: popupFadeIn 1s forwards;
-        }
-
-        @keyframes popupFadeIn {
-            to { transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            border-radius: 25px;
-            margin: 10px;
-            transition: all 0.3s;
-        }
-
-        .yes {
-            background: #e63946;
-            color: white;
-        }
-
-        .yes:hover {
-            background: #a82030;
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(232, 57, 70, 0.8);
-        }
-
-        .no {
-            background: #ffe5e9;
-            color: #e63946;
-        }
-
-        .no:hover {
-            background: #ffcdd4;
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(255, 205, 212, 0.8);
-        }
-
-        .celebration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: none;
-            background: rgba(255, 105, 180, 0.5);
-            justify-content: center;
-            align-items: center;
-            font-size: 36px;
-            font-weight: bold;
-            color: white;
-            animation: glow 2s infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #ff69b4; }
-            to { text-shadow: 0 0 30px #ff69b4; }
-        }
-
-        .quote {
-            font-style: italic;
-            font-size: 20px;
-            margin-top: 30px;
-        }
-    </style>
-</head>
-<body>
-    <div class="popup" id="popup">
-        <h2>Priya, Will You Be My Forever Valentine? 💖</h2>
-        <p class="quote">"In a world full of chaos, your love is my sanctuary."</p>
-        <div class="buttons">
-            <button class="btn yes" onclick="celebrate()">Yayy, I love you!</button>
-            <button class="btn no" id="noBtn">Nope</button>
-        </div>
-    </div>
-    <div class="celebration" id="celebration">🎉 Priya, Love Blossoms Eternally! 💕</div>
-    <script>
-        function createPetal() {
-            let petal = document.createElement('div');
-            petal.classList.add('petal');
-            document.body.appendChild(petal);
-            petal.style.left = Math.random() * window.innerWidth + 'px';
-            petal.style.animationDuration = 3 + Math.random() * 5 + 's';
-            setTimeout(() => petal.remove(), 6000);
-        }
-        setInterval(createPetal, 300);
-
-        let noBtn = document.getElementById('noBtn');
-        let popup = document.getElementById('popup');
-
-        noBtn.addEventListener('mouseover', () => {
-            let x = Math.random() * (window.innerWidth - popup.clientWidth);
-            let y = Math.random() * (window.innerHeight - popup.clientHeight);
-            popup.style.left = `${x}px`;
-            popup.style.top = `${y}px`;
-        });
-
-        function celebrate() {
-            document.getElementById('popup').style.display = 'none';
-            document.getElementById('celebration').style.display = 'flex';
-        }
-    </script>
-</body>
-</html>
-
-
-
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romantic Moments for Priya</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
             background: url('./hearts.jpg');
             font-family: 'Georgia', serif;
             color: white;
             text-align: center;
+            min-height: 100vh;
+            perspective: 1000px;
         }
         .petal {
             position: absolute;
             width: 15px;
             height: 15px;
-            background: 'hearts.jpg';
+            background: #663399;
             border-radius: 50%;
             animation: fall linear infinite;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(102, 51, 153, 0.8);
         }
         @keyframes fall {
-            from { transform: translateY(-10vh) rotate(0deg); }
-            to { transform: translateY(100vh) rotate(360deg); }
+            from { 
+                transform: translateY(-10vh) rotate(0deg) translateX(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(45vh) rotate(180deg) translateX(20px);
+                opacity: 1;
+            }
+            to { 
+                transform: translateY(100vh) rotate(360deg) translateX(-20px);
+                opacity: 0.8;
+            }
         }
         .popup {
             position: fixed;
             background: rgba(255, 255, 255, 0.9);
-            color: #ff6a88;
+            color: #663399;
             padding: 30px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transition: top 0.3s, left 0.3s;
+            box-shadow: 0 8px 20px rgba(102, 51, 153, 0.3);
+            transition: all 0.5s;
+            animation: floating 3s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-20px); }
         }
         .buttons {
             margin-top: 20px;
@@ -209,20 +65,40 @@
             border-radius: 25px;
             margin: 10px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         .yes {
-            background: #e63946;
+            background: #663399;
             color: white;
         }
         .yes:hover {
-            background: #a82030;
+            background: #4B0082;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(102, 51, 153, 0.5);
+        }
+        .yes::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
         }
         .no {
             background: #ffe5e9;
-            color: #e63946;
+            color: #663399;
         }
         .no:hover {
             background: #ffcdd4;
+            transform: scale(0.9);
         }
         .celebration {
             position: fixed;
@@ -231,17 +107,39 @@
             width: 100vw;
             height: 100vh;
             display: none;
-            background: rgba(255, 105, 180, 0.5);
+            background: rgba(102, 51, 153, 0.7);
             justify-content: center;
             align-items: center;
             font-size: 36px;
             font-weight: bold;
             color: white;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .quote {
             font-style: italic;
             font-size: 20px;
             margin-top: 30px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -250,7 +148,7 @@
         <h2>Priya, Will You Be My Forever Valentine? 💖</h2>
         <p class="quote">"In a world full of chaos, your love is my sanctuary."</p>
         <div class="buttons">
-            <button class="btn yes" onclick="celebrate()">Absolutely Yes!</button>
+            <button class="btn yes" onclick="celebrate()">Yayy, I love you! 💜</button>
             <button class="btn no" id="noBtn">Nope</button>
         </div>
     </div>
@@ -264,7 +162,19 @@
             petal.style.animationDuration = 3 + Math.random() * 5 + 's';
             setTimeout(() => petal.remove(), 6000);
         }
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💜';
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
         setInterval(createPetal, 300);
+        setInterval(createHeart, 1000);
 
         let noBtn = document.getElementById('noBtn');
         let popup = document.getElementById('popup');
@@ -278,28 +188,14 @@
 
         function celebrate() {
             document.getElementById('popup').style.display = 'none';
-            document.getElementById('celebration').style.display = 'flex';
+            let celebration = document.getElementById('celebration');
+            celebration.style.display = 'flex';
+            
+            // Create burst of hearts
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 100);
+            }
         }
     </script>
 </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Image</title>
-    <style>
-        body {
-            margin: 0;
-            background: url('./hearts.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-    </style>
-</head>
-<body>
-</body>
-</html>
- -->
- -->
