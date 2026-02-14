@@ -3,51 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Celebration</title>
+    <title>Romantic Moments for Priya</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fbeefb;
-            color: #500050;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Georgia', serif;
+            color: white;
             text-align: center;
-            animation: fadeIn 1s;
+            min-height: 100vh;
+            perspective: 1000px;
         }
-        h1 {
-            font-size: 3em;
-            margin: 20px 0;
+
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #663399;
+            border-radius: 50%;
+            animation: fall linear infinite;
+            box-shadow: 0 0 15px rgba(102, 51, 153, 0.8);
         }
-        img {
-            max-width: 90%;
-            height: auto;
+
+        @keyframes fall {
+            from { 
+                transform: translateY(-10vh) rotate(0deg) translateX(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(45vh) rotate(180deg) translateX(20px);
+                opacity: 1;
+            }
+            to { 
+                transform: translateY(100vh) rotate(360deg) translateX(-20px);
+                opacity: 0.8;
+            }
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            color: #663399;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 900px;
+            width: 90%;
+            animation: slideIn 0.8s ease-out;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .priya-image {
+            width: 100%;
+            height: 400px;
             border-radius: 15px;
-            transition: transform 0.5s;
+            object-fit: cover;
+            box-shadow: 0 10px 40px rgba(102, 51, 153, 0.4);
+            border: 3px solid #663399;
+            animation: float 4s ease-in-out infinite;
         }
-        img:hover {
-            transform: scale(1.05);
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
-        .page {
-            margin: 20px;
-            padding: 20px;
-            border: 2px solid #500050;
-            background-color: #ffffff;
-            border-radius: 10px;
+
+        .content-section {
+            flex: 1;
+            min-width: 300px;
         }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #663399, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 18px;
+            margin: 25px 0;
+            color: #555;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes {
+            background: linear-gradient(135deg, #663399, #764ba2);
+            color: white;
+        }
+
+        .yes:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(102, 51, 153, 0.5);
+        }
+
+        .yes:active {
+            transform: scale(0.95);
+        }
+
+        .yes::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .no {
+            background: #ffe5e9;
+            color: #663399;
+            border: 2px solid #663399;
+        }
+
+        .no:hover {
+            background: #ffcdd4;
+            transform: scale(0.92);
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            background: linear-gradient(135deg, rgba(102, 51, 153, 0.85), rgba(118, 75, 162, 0.85));
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            animation: fadeIn 1s ease-in;
+            z-index: 1000;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .celebration-image {
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            margin: 30px;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+            animation: scaleIn 0.8s ease-out;
+            border: 4px solid white;
+            object-fit: cover;
+        }
+
+        @keyframes scaleIn {
+            from { 
+                transform: scale(0);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration-text {
+            font-size: 24px;
+            max-width: 600px;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out 0.5s backwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float-heart 4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes float-heart {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .popup {
+                flex-direction: column;
+                gap: 20px;
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .priya-image {
+                height: 300px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="page">
-        <h1>Welcome to Our Valentine's Day Celebration!</h1>
-        <img src="priya.jpg" alt="Priya's image">
-        <p>Join us as we celebrate love and happiness!</p>
+    <div class="container">
+        <div class="popup" id="popup">
+            <div class="image-section">
+                <img src="priya.jpg" alt="Priya" class="priya-image" onerror="this.style.display='none'">
+            </div>
+            <div class="content-section">
+                <h2>Priya, Happy Valentine's Day! 💖</h2>
+                <p class="quote">"In a world full of chaos, your love is my sanctuary."</p>
+                <div class="buttons">
+                    <button class="btn yes" onclick="celebrate()">Yayy, I love you! 💜</button>
+                    <button class="btn no" id="noBtn">Nope</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="page">
-        <h1>Together, We Celebrate</h1>
-        <img src="celebration.jpg" alt="Celebration image">
-        <p>Let’s make beautiful memories together!</p>
+
+    <div class="celebration" id="celebration">
+        <img src="celebration.jpg" alt="Us" class="celebration-image" onerror="this.style.display='none'">
+        <div class="celebration-text">
+            🎉 Happy Valentine's Day babe! I know I haven't sent anything yet (your comparisons hit different lol but no hate, all love!) but know that you mean everything to me. Here's to many more celebrations together! Love You- Taran💕
+        </div>
     </div>
+
+    <script>
+        function createPetal() {
+            let petal = document.createElement('div');
+            petal.classList.add('petal');
+            document.body.appendChild(petal);
+            petal.style.left = Math.random() * window.innerWidth + 'px';
+            petal.style.animationDuration = 3 + Math.random() * 5 + 's';
+            setTimeout(() => petal.remove(), 6000);
+        }
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💜';
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        setInterval(createPetal, 300);
+        setInterval(createHeart, 1000);
+
+        let noBtn = document.getElementById('noBtn');
+        let popup = document.getElementById('popup');
+
+        noBtn.addEventListener('mouseover', () => {
+            let randomX = Math.random() * 200 - 100;
+            let randomY = Math.random() * 200 - 100;
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+
+        function celebrate() {
+            document.getElementById('popup').style.display = 'none';
+            let celebration = document.getElementById('celebration');
+            celebration.style.display = 'flex';
+            
+            // Create burst of hearts
+            for(let i = 0; i < 30; i++) {
+                setTimeout(createHeart, i * 80);
+            }
+        }
+    </script>
 </body>
 </html>
